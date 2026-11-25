@@ -1,0 +1,293 @@
+@import "tailwindcss";
+
+@theme {
+  --color-B: #4285F4;
+  --color-R: #EA4335;
+  --color-Y: #FBBC04;
+  --color-G: #34A853;
+  --color-btn: #1A73E8;
+  --color-btnd: #174EA6;
+  --color-ctf-btn: #D93025;
+  --color-ctf-btnd: #A50E0E;
+  --color-ai-btn: #188038;
+  --color-ai-btnd: #0D652D;
+  --color-y-btnd: #C48F00;
+  --color-onY: #201A00;
+  --color-gold: #FBBC04;
+  --color-silver: #C4C7D4;
+  --color-bronze: #D7925F;
+
+  --font-display: var(--fd);
+  --font-sans: var(--fu);
+  --font-mono: var(--fm);
+
+  --ease-arena: cubic-bezier(.16, 1, .3, 1);
+  --ease-ui: cubic-bezier(.2, .8, .2, 1);
+  --ease-pop: cubic-bezier(.34, 1.56, .64, 1);
+  --ease-exit: cubic-bezier(.4, 0, 1, 1);
+}
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0E0D16;
+  --bg2: #13121E;
+  --s1: #1A1928;
+  --s2: #232236;
+  --ln: #2C2A40;
+  --ln2: #3E3B58;
+  --fg: #F3F2F8;
+  --fg2: #BDBAD0;
+  --fg3: #8F8CA6;
+  --B: #4285F4;
+  --R: #EA4335;
+  --Y: #FBBC04;
+  --G: #34A853;
+  --Bt: #8AB4F8;
+  --Rt: #F28B82;
+  --Yt: #FDD663;
+  --Gt: #81C995;
+  --Bs: rgba(66, 133, 244, .16);
+  --Rs: rgba(234, 67, 53, .16);
+  --Ys: rgba(251, 188, 4, .15);
+  --Gs: rgba(52, 168, 83, .16);
+  --btn: #1A73E8;
+  --btnd: #174EA6;
+  --onY: #201A00;
+  --ag: #FBBC04;
+  --ss: #C4C7D4;
+  --bz: #D7925F;
+  --sh: 0 16px 40px rgba(0, 0, 0, .5);
+  --fd: var(--font-unbounded), Outfit, sans-serif;
+  --fu: "Google Sans Flex", var(--font-outfit), Outfit, sans-serif;
+  --fm: "Google Sans Code", var(--font-jetbrains), "JetBrains Mono", monospace;
+  --far: var(--font-plex-ar), "IBM Plex Sans Arabic", var(--fu);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #F6F5FA;
+  --bg2: #EEEDF4;
+  --s1: #FFFFFF;
+  --s2: #F3F2F8;
+  --ln: #E3E1EC;
+  --ln2: #CBC8DA;
+  --fg: #1E1C2E;
+  --fg2: #4A4760;
+  --fg3: #68657E;
+  --Bt: #1A62D2;
+  --Rt: #C5221F;
+  --Yt: #8A5A00;
+  --Gt: #137333;
+  --Bs: rgba(66, 133, 244, .12);
+  --Rs: rgba(234, 67, 53, .11);
+  --Ys: rgba(251, 188, 4, .18);
+  --Gs: rgba(52, 168, 83, .13);
+  --sh: 0 16px 40px rgba(30, 28, 46, .14);
+}
+
+/* The design does not apply a global border-box reset: every element is content-box
+   unless its own inline style says otherwise (and those inline values are ported as-is).
+   Tailwind's preflight would silently shrink bordered, fixed-height elements, so the
+   reset is turned back off here to keep the box model identical to the design. */
+*,
+*::before,
+*::after {
+  box-sizing: content-box;
+}
+
+html {
+  background: var(--bg);
+  line-height: normal;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--fu);
+  line-height: normal;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--Bt);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--fg3);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- keyframes (ported verbatim from the design) ---------- */
+@keyframes ymConf {
+  0% { transform: translate(-50%, -50%) scale(.6); opacity: 1 }
+  100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--r)); opacity: 0 }
+}
+@keyframes ymPop {
+  0% { transform: scale(.5) rotate(-12deg); opacity: 0 }
+  100% { transform: scale(1) rotate(-6deg); opacity: 1 }
+}
+@keyframes ymIn {
+  0% { transform: translateY(8px); opacity: 0 }
+  100% { transform: none; opacity: 1 }
+}
+@keyframes ymSpin { to { transform: rotate(360deg) } }
+@keyframes ymShakeA {
+  0%, 100% { transform: none }
+  25% { transform: translateX(-6px) }
+  75% { transform: translateX(6px) }
+}
+@keyframes ymShakeB {
+  0%, 100% { transform: none }
+  25% { transform: translateX(-6px) }
+  75% { transform: translateX(6px) }
+}
+@keyframes ymFill { from { width: 0 } to { width: 100% } }
+@keyframes ymPulse {
+  0% { box-shadow: 0 0 0 0 rgba(52, 168, 83, .6) }
+  100% { box-shadow: 0 0 0 10px rgba(52, 168, 83, 0) }
+}
+@keyframes ymDot {
+  0%, 100% { transform: none }
+  50% { transform: translateY(-8px) }
+}
+@keyframes ymShimmer {
+  0% { background-position: -600px 0 }
+  100% { background-position: 600px 0 }
+}
+/* Makers section */
+@keyframes ymBlink { 0%, 49% { opacity: 1 } 50%, 100% { opacity: 0 } }
+@keyframes ymGl { 0%, 14% { opacity: 1 } 15%, 100% { opacity: 0 } }
+@keyframes ymGlBase { 0%, 70% { opacity: .12 } 100% { opacity: 1 } }
+@keyframes ymDraw { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+@keyframes ymLogo { 0%, 100% { opacity: .35 } 50% { opacity: 1 } }
+@keyframes ymCardIn {
+  from { opacity: 0; transform: translateY(8px) scale(.94) }
+  to { opacity: 1; transform: none }
+}
+@keyframes ymBar { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+@keyframes ymFade { from { opacity: 0 } to { opacity: 1 } }
+@keyframes ymTip { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: none } }
+@keyframes ymSpark {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(1) }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.2) }
+}
+@keyframes ymToast {
+  from { opacity: 0; transform: translate(-50%, 12px) scale(.96) }
+  to { opacity: 1; transform: translate(-50%, 0) }
+}
+@keyframes ymNudge {
+  0%, 100% { transform: translateX(0) }
+  50% { transform: translateX(-6px) }
+}
+@keyframes ymDot2 {
+  0% { box-shadow: 0 0 0 0 rgba(251, 188, 4, .7) }
+  100% { box-shadow: 0 0 0 10px rgba(251, 188, 4, 0) }
+}
+@keyframes ymSweep {
+  0% { background-position: -340px 0 }
+  100% { background-position: 340px 0 }
+}
+
+.ym-scroll-x { scrollbar-width: none; -ms-overflow-style: none; }
+.ym-scroll-x::-webkit-scrollbar { display: none; }
+
+.ym-clamp2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ym-skel {
+  background: linear-gradient(90deg, var(--s2) 0, var(--ln) 50%, var(--s2) 100%);
+  background-size: 600px 100%;
+  animation: ymShimmer 1.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- interaction states (the design's style-hover / style-active attrs) ---------- */
+.ym-navlink:hover { background: var(--s1); color: var(--fg) }
+.ym-iconbtn:hover { background: var(--s1); color: var(--fg) }
+.ym-ghost:hover { background: var(--s1); color: var(--fg) }
+.ym-playercard:hover { border-color: var(--ln2) }
+.ym-menuitem:hover { background: var(--s2); color: var(--fg) }
+.ym-menuitem-danger:hover { background: var(--Rs); color: var(--Rt) }
+
+.ym-press:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--base, var(--btnd)) !important }
+
+.ym-card:hover { transform: translateY(-4px); border-color: var(--tc); box-shadow: var(--glow) }
+.ym-card:focus-visible { outline: 3px solid var(--Bt); outline-offset: 3px }
+.ym-rowcard:hover { border-color: var(--tc) }
+.ym-rowcard:focus-visible { outline: 3px solid var(--Bt); outline-offset: 3px }
+
+.ym-res:hover { border-color: var(--ln2); transform: translateY(-2px) }
+.ym-social:hover { color: var(--fg); border-color: var(--ln2) }
+.ym-socialcard:hover { border-color: var(--ln2); background: var(--s2) }
+.ym-footlink:hover { color: var(--Bt) }
+.ym-makerlink:hover { color: #fff; border-color: rgba(255,255,255,.3) }
+.ym-ghost-white:hover { background: rgba(255,255,255,.06) }
+.ym-admrow:hover { background: var(--s2) }
+.ym-admbtn:hover { background: var(--s2); color: var(--fg) }
+.ym-sidelink:hover { background: var(--s1); color: var(--fg) }
+
+button:focus-visible, a:focus-visible, [tabindex]:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid var(--Bt);
+  outline-offset: 2px;
+}
+
+@keyframes ymSlideIn { from { transform: translateX(100%) } to { transform: none } }
+@keyframes ymDrawerIn { from { transform: translateX(100%) } to { transform: none } }
+
+/* ---------- Dev-Shirt Coder CTA ---------- */
+/* This component is authored with Tailwind utilities, which assume border-box, so the
+   content-box default above is re-enabled to border-box inside it. */
+.dsc,
+.dsc *,
+.dsc *::before,
+.dsc *::after {
+  box-sizing: border-box;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) }
+  50% { transform: translateY(-8px) }
+}
+
+/* Tailwind v4 applies rotate-* through the standalone `rotate` property, so the chips keep
+   their tilt while this animates `transform`. */
+.dsc-float {
+  animation-name: float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsc-float {
+    animation: none !important;
+    transform: none !important;
+  }
+}
