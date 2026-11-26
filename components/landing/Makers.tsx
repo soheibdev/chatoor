@@ -26,14 +26,14 @@ export interface Maker {
 
 export const MAKERS: Maker[] = [
   {
-    tag: "P1", name: "Maker 01", role: "Lead builder · Problem Solving", cls: "Algorithm Architect", track: "ps",
+    tag: "P1", name: "Laaraf Mohamed Soheib", role: "Lead builder · Problem Solving", cls: "Algorithm Architect", track: "ps",
     quote: "If it passes on the first try, I made it too easy.",
-    stats: [["Logic", 94], ["Speed", 81], ["Edge cases", 88]], gh: "#", li: "#", face: [860, 285],
+    stats: [["Logic", 94], ["Speed", 81], ["Edge cases", 88]], gh: "https://github.com/soheibdev", li: "https://www.linkedin.com/in/laaraf-mohamed-soheib-12b179261/", face: [860, 285],
   },
   {
-    tag: "P2", name: "Maker 02", role: "Lead builder · Cybersecurity", cls: "CTF Master", track: "ctf",
+    tag: "P2", name: "Bezai Ayoub", role: "Lead builder · Cybersecurity", cls: "CTF Master", track: "ctf",
     quote: "Every flag is hiding somewhere you already looked.",
-    stats: [["Exploits", 92], ["Recon", 86], ["Stealth", 79]], gh: "#", li: "#", face: [1256, 255],
+    stats: [["Exploits", 92], ["Recon", 86], ["Stealth", 79]], gh: "#", li: "https://www.linkedin.com/in/ayoub-bezai-b55315288/", face: [1256, 255],
   },
 ];
 
